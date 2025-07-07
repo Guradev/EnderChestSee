@@ -1,9 +1,9 @@
 # 🧱 EnderChestSee
 
-A powerful, modern Minecraft Paper plugin for viewing and editing any online player's **Ender Chest**!  
+A powerful, modern Minecraft Paper plugin for version 1.21.4 that allows viewing and editing any online player's **Ender Chest**!
 Supports permission-based editing, MiniMessage-formatted messages, and full inventory sync.
 
-![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21%2B-green)
+![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.4-green)
 ![Platform](https://img.shields.io/badge/Platform-Paper-blue)
 ![Java](https://img.shields.io/badge/Java-17%2B-orange)
 
