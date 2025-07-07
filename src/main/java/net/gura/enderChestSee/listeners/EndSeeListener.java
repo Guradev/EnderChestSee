@@ -29,11 +29,6 @@ public class EndSeeListener implements Listener {
         if (!(event.getWhoClicked() instanceof Player viewer)) return;
         if (event.getView().getTopInventory().getType() != InventoryType.ENDER_CHEST) return;
 
-        if (!viewer.hasPermission("endsee.modify")) {
-            event.setCancelled(true);
-            return;
-        }
-
         UUID targetUUID = gui.getEnderSeeSession(viewer);
         if (targetUUID == null) return;
 
@@ -41,6 +36,12 @@ public class EndSeeListener implements Listener {
         if (target == null) return;
 
         if (event.getView().getTopInventory().equals(event.getClickedInventory())) {
+
+            if (!viewer.hasPermission("endsee.modify")) {
+                event.setCancelled(true);
+                viewer.updateInventory();
+                return;
+            }
 
             Bukkit.getScheduler().runTaskLater(plugin, () -> {
                 Inventory gui = event.getView().getTopInventory();
@@ -58,11 +59,6 @@ public class EndSeeListener implements Listener {
     public void onDrag(InventoryDragEvent event) {
         if (!(event.getWhoClicked() instanceof Player viewer)) return;
 
-        if (!viewer.hasPermission("endsee.modify")) {
-            event.setCancelled(true);
-            return;
-        }
-
         UUID targetUUID = gui.getEnderSeeSession(viewer);
         if (targetUUID == null) return;
 
@@ -71,7 +67,12 @@ public class EndSeeListener implements Listener {
 
         Inventory top = event.getView().getTopInventory();
 
-        // If the drag affected the custom ender chest inventory
+        if (!viewer.hasPermission("endsee.modify")) {
+            event.setCancelled(true);
+            viewer.updateInventory();
+            return;
+        }
+
         for (int slot : event.getRawSlots()) {
             if (slot < top.getSize()) {
                 Bukkit.getScheduler().runTaskLater(plugin, () -> {
