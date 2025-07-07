@@ -20,4 +20,4 @@ permissions:
 commands:
   endersee:
     description: Command to see the enderchest of other players
-    permission: endersee.use
+    permission: endsee.use
