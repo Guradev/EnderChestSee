@@ -6,7 +6,7 @@
 prefix: "<gray>[<green>EnderSee</green>]</gray> "
 
 only-players: "<white>Only players can use this command</white>"
-no-permission: "<red>>No permission.</red>"
+no-permission: "<red>No permission.</red>"
 
 invalid-usage: "<red>Usage: /endersee <player> </red>"
 player-not-found: "<red>They player wasn't found</red>"

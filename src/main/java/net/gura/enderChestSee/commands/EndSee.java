@@ -31,7 +31,7 @@ public class EndSee implements CommandExecutor {
             return true;
         }
 
-        if (!viewer.hasPermission("endsee.see")) {
+        if (!viewer.hasPermission("endsee.use")) {
             viewer.sendMessage(messageHandler.get("no-permission"));
             return true;
         }
