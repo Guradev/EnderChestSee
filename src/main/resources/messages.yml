@@ -3,12 +3,14 @@
 # MADE BY GURA1
 #
 
+prefix: "<gray>[<green>EnderSee</green>]</gray> "
+
 only-players: "<white>Only players can use this command</white>"
-no-permission: "<red>Sin permiso.</red>"
+no-permission: "<red>>No permission.</red>"
 
-invalid-usage: "<red>Uso: /endersee <jugador> </red>"
-player-not-found: "<red>No se ha encontrado al jugador o está offline</red>"
+invalid-usage: "<red>Usage: /endersee <player> </red>"
+player-not-found: "<red>They player wasn't found</red>"
 
-open-endchest: "<green>Abriendo enderchest de: <player></green>"
+open-endchest: "<green>Opening enderchest of <player> </green>"
 
-reload-complete: "<green>Se han recargado los mensajes del EnderChestSee correctamente</green>"
+reload-complete: "<green>Reloaded Successfully</green>"
