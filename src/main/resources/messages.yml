@@ -1,0 +1,14 @@
+#
+# ENDSEE PLUGIN
+# MADE BY GURA1
+#
+
+only-players: "<white>Only players can use this command</white>"
+no-permission: "<red>Sin permiso.</red>"
+
+invalid-usage: "<red>Uso: /endersee <jugador> </red>"
+player-not-found: "<red>No se ha encontrado al jugador o está offline</red>"
+
+open-endchest: "<green>Abriendo enderchest de: <player></green>"
+
+reload-complete: "<green>Se han recargado los mensajes del EnderChestSee correctamente</green>"
