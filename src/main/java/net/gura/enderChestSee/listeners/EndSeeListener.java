@@ -8,7 +8,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -27,30 +26,40 @@ public class EndSeeListener implements Listener {
     @EventHandler
     public void onEnderSeeClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player viewer)) return;
-        if (event.getView().getTopInventory().getType() != InventoryType.ENDER_CHEST) return;
 
         UUID targetUUID = gui.getEnderSeeSession(viewer);
         if (targetUUID == null) return;
 
+        if (!gui.isEnderSeeGUI(viewer)) return;
+
         Player target = Bukkit.getPlayer(targetUUID);
         if (target == null) return;
 
-        if (event.getView().getTopInventory().equals(event.getClickedInventory())) {
+        Inventory clicked = event.getClickedInventory();
+        Inventory top = event.getView().getTopInventory();
 
-            if (!viewer.hasPermission("endsee.modify")) {
+        boolean isTop = clicked != null && clicked.equals(top);
+        boolean shiftClick = event.isShiftClick();
+        boolean numberKey = event.getClick().isKeyboardClick();
+
+        if (!viewer.hasPermission("endsee.modify")) {
+            if (isTop) {
                 event.setCancelled(true);
-                viewer.updateInventory();
                 return;
             }
-
+            if (shiftClick && clicked != null && !clicked.equals(top)) {
+                event.setCancelled(true);
+                return;
+            }
+            if (numberKey) {
+                event.setCancelled(true);
+                return;
+            }
+        }
+        // Chequeamos permisos y hacemos sync
+        if (viewer.hasPermission("endsee.modify") && isTop) {
             Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                Inventory gui = event.getView().getTopInventory();
-                Inventory realEnderChest = target.getEnderChest();
-
-                for (int i = 0; i < 27; i++) {
-                    realEnderChest.setItem(i, gui.getItem(i));
-                }
-                target.updateInventory();
+                syncToRealEnderChest(target, top);
             }, 1L);
         }
     }
@@ -67,25 +76,17 @@ public class EndSeeListener implements Listener {
 
         Inventory top = event.getView().getTopInventory();
 
-        if (!viewer.hasPermission("endsee.modify")) {
+        boolean affectsTop = event.getRawSlots().stream().anyMatch(slot -> slot < top.getSize());
+
+        if (affectsTop && !viewer.hasPermission("endsee.modify")) {
             event.setCancelled(true);
-            viewer.updateInventory();
             return;
         }
 
-        for (int slot : event.getRawSlots()) {
-            if (slot < top.getSize()) {
-                Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                    Inventory gui = event.getView().getTopInventory();
-                    Inventory realEnderChest = target.getEnderChest();
-
-                    for (int i = 0; i < 27; i++) {
-                        realEnderChest.setItem(i, gui.getItem(i));
-                    }
-                    target.updateInventory();
-                }, 1L);
-                break;
-            }
+        if (affectsTop && viewer.hasPermission("endsee.modify")) {
+            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                syncToRealEnderChest(target, top);
+            }, 1L);
         }
     }
 
@@ -97,17 +98,25 @@ public class EndSeeListener implements Listener {
         if (targetUUID == null) return;
 
         Player target = Bukkit.getPlayer(targetUUID);
-        if (target == null) return;
-        Inventory guiInv = event.getInventory();
+
+        if (target != null && viewer.hasPermission("endsee.modify")) {
+            Inventory guiInv = event.getInventory();
+            syncToRealEnderChest(target, guiInv);
+            target.saveData();
+        }
+
+        gui.removeEnderSeeSession(viewer);
+    }
+
+    private void syncToRealEnderChest(Player target, Inventory guiInventory) {
         Inventory realEnderChest = target.getEnderChest();
 
         for (int i = 0; i < 27; i++) {
-            realEnderChest.setItem(i, guiInv.getItem(i));
+            realEnderChest.setItem(i, guiInventory.getItem(i));
         }
 
-        target.updateInventory();
-        target.saveData();
-
-        gui.removeEnderSeeSession(viewer);
+        if (target.getOpenInventory().getTopInventory().equals(realEnderChest)) {
+            target.updateInventory();
+        }
     }
 }

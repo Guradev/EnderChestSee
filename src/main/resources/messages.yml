@@ -3,6 +3,8 @@
 # MADE BY GURA1
 #
 
+# Uses MiniMessage
+
 prefix: "<gray>[<green>EnderSee</green>]</gray> "
 
 only-players: "<white>Only players can use this command</white>"
@@ -12,5 +14,6 @@ invalid-usage: "<red>Usage: /endersee <player> </red>"
 player-not-found: "<red>They player wasn't found</red>"
 
 open-endchest: "<green>Opening enderchest of <player> </green>"
+enderchest-gui: "<dark_gray><player>'s Enderchest</dark_gray>"
 
 reload-complete: "<green>Reloaded Successfully</green>"
