@@ -26,29 +26,30 @@ public class EndSee implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
-        if (!(sender instanceof Player viewer)) {
-            sender.sendMessage(messageHandler.get("only-players"));
-            return true;
-        }
-
-        if (!viewer.hasPermission("endsee.use")) {
-            viewer.sendMessage(messageHandler.get("no-permission"));
-            return true;
-        }
-
-        if (args.length != 1) {
-            viewer.sendMessage(messageHandler.get("invalid-usage"));
-            return true;
-        }
 
         if (args[0].equalsIgnoreCase("reload")) {
-            if (!sender.hasPermission("endsee.reload")) {
+            if (!sender.hasPermission("endersee.reload")) {
                 sender.sendMessage(messageHandler.get("no-permission"));
                 return true;
             }
 
             messageHandler.reload();
             sender.sendMessage(messageHandler.get("reload-complete"));
+            return true;
+        }
+
+        if (!(sender instanceof Player viewer)) {
+            sender.sendMessage(messageHandler.get("only-players"));
+            return true;
+        }
+
+        if (!viewer.hasPermission("endersee.use")) {
+            viewer.sendMessage(messageHandler.get("no-permission"));
+            return true;
+        }
+
+        if (args.length != 1) {
+            viewer.sendMessage(messageHandler.get("invalid-usage"));
             return true;
         }
 

@@ -32,11 +32,11 @@ Supports permission-based editing, MiniMessage-formatted messages, and full inve
 
 ## 🔐 Permissions
 
-| Node                | Description                                             |
-|---------------------|---------------------------------------------------------|
-| `endsee.use`      | Allows using `/endersee` to view a player's Ender Chest   |
-| `endsee.reload`   | Allows reloading the plugin’s messages                    |
-| `endsee.modify`   | Allows modification of a player's enderchest              |
+| Node              | Description                                              |
+|-------------------|----------------------------------------------------------|
+| `endersee.use`    | Allows using `/endersee` to view a player's Ender Chest  |
+| `endersee.reload` | Allows reloading the plugin’s messages                   |
+| `endersee.modify` | Allows modification of a player's enderchest             |
 
 ---
 
@@ -51,7 +51,8 @@ only-players: "<white>Only players can use this command</white>"
 no-permission: "<red>No permission.</red>"
 invalid-usage: "<red>Usage: /endersee <player> </red>"
 player-not-found: "<red>They player wasn't found</red>"
-open-endchest: "<green>Opening enderchest of <player></green>"
+open-endchest: "<green>Opening enderchest of <player> </green>"
+enderchest-gui: "<dark_gray><player>'s Enderchest</dark_gray>"
 reload-complete: "<green>Reloaded Successfully</green>"
 ```
 

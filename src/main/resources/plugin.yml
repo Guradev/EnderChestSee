@@ -7,17 +7,17 @@ authors: [ Gura ]
 description: Minecraft Plugin that allows you to see enderchests of other players
 
 permissions:
-  endsee.use:
+  endersee.use:
     description: Default permission that allows the use of the /endersee <player> command
     default: op
-  endsee.modify:
+  endersee.modify:
     description: Permission that allows the modification of the player's enderchest
     default: op
-  endsee.reload:
+  endersee.reload:
     description: Permission that allows reloading the messages of the plugin
     default: op
 
 commands:
   endersee:
     description: Command to see the enderchest of other players
-    permission: endsee.use
+    permission: endersee.use

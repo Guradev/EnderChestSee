@@ -42,7 +42,7 @@ public class EndSeeListener implements Listener {
         boolean shiftClick = event.isShiftClick();
         boolean numberKey = event.getClick().isKeyboardClick();
 
-        if (!viewer.hasPermission("endsee.modify")) {
+        if (!viewer.hasPermission("endersee.modify")) {
             if (isTop) {
                 event.setCancelled(true);
                 return;
@@ -57,7 +57,7 @@ public class EndSeeListener implements Listener {
             }
         }
         // Chequeamos permisos y hacemos sync
-        if (viewer.hasPermission("endsee.modify") && isTop) {
+        if (viewer.hasPermission("endersee.modify") && isTop) {
             Bukkit.getScheduler().runTaskLater(plugin, () -> {
                 syncToRealEnderChest(target, top);
             }, 1L);
@@ -78,12 +78,12 @@ public class EndSeeListener implements Listener {
 
         boolean affectsTop = event.getRawSlots().stream().anyMatch(slot -> slot < top.getSize());
 
-        if (affectsTop && !viewer.hasPermission("endsee.modify")) {
+        if (affectsTop && !viewer.hasPermission("endersee.modify")) {
             event.setCancelled(true);
             return;
         }
 
-        if (affectsTop && viewer.hasPermission("endsee.modify")) {
+        if (affectsTop && viewer.hasPermission("endersee.modify")) {
             Bukkit.getScheduler().runTaskLater(plugin, () -> {
                 syncToRealEnderChest(target, top);
             }, 1L);
@@ -99,7 +99,7 @@ public class EndSeeListener implements Listener {
 
         Player target = Bukkit.getPlayer(targetUUID);
 
-        if (target != null && viewer.hasPermission("endsee.modify")) {
+        if (target != null && viewer.hasPermission("endersee.modify")) {
             Inventory guiInv = event.getInventory();
             syncToRealEnderChest(target, guiInv);
             target.saveData();

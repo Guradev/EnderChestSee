@@ -21,7 +21,7 @@ public class EnderSeeGUI {
         this.messageHandler = messageHandler;
     }
     public void openEnderChest(Player viewer, Player target) {
-        if (!viewer.hasPermission("endsee.use")) {
+        if (!viewer.hasPermission("endersee.use")) {
             viewer.sendMessage(messageHandler.get("no-permission"));
             return;
         }

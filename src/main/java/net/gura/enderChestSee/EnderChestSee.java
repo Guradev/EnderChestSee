@@ -16,7 +16,7 @@ public final class EnderChestSee extends JavaPlugin {
     public void onEnable() {
 
         messageHandler = new MessageHandler(this);
-        this.gui = new EnderSeeGUI();
+        this.gui = new EnderSeeGUI(messageHandler);
 
         //Register Commands
         getCommand("endersee").setExecutor(new EndSee(this, messageHandler, gui));
