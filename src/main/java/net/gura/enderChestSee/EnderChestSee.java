@@ -4,6 +4,7 @@ import net.gura.enderChestSee.commands.EndSee;
 import net.gura.enderChestSee.gui.EnderSeeGUI;
 import net.gura.enderChestSee.handler.MessageHandler;
 import net.gura.enderChestSee.listeners.EndSeeListener;
+import net.gura.enderChestSee.utils.CompatibilityUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -30,10 +31,12 @@ public final class EnderChestSee extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        for (Player player : getServer().getOnlinePlayers()) {
-            player.saveData();
-        }
+        CompatibilityUtils.runForAllPlayersSafe(this, Player::saveData);
 
         getServer().getConsoleSender().sendMessage("[EnderChestSee] Plugin disabled!");
+    }
+
+    public static EnderChestSee getInstance() {
+        return getPlugin(EnderChestSee.class);
     }
 }

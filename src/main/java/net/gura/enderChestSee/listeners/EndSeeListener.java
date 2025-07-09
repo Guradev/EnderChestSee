@@ -1,6 +1,7 @@
 package net.gura.enderChestSee.listeners;
 
 import net.gura.enderChestSee.gui.EnderSeeGUI;
+import net.gura.enderChestSee.utils.CompatibilityUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -58,7 +59,7 @@ public class EndSeeListener implements Listener {
         }
         // Chequeamos permisos y hacemos sync
         if (viewer.hasPermission("endersee.modify") && isTop) {
-            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            CompatibilityUtils.runTaskLaterForPlayer(target, () -> {
                 syncToRealEnderChest(target, top);
             }, 1L);
         }
@@ -84,7 +85,7 @@ public class EndSeeListener implements Listener {
         }
 
         if (affectsTop && viewer.hasPermission("endersee.modify")) {
-            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            CompatibilityUtils.runTaskLaterForPlayer(target, () -> {
                 syncToRealEnderChest(target, top);
             }, 1L);
         }
@@ -102,7 +103,7 @@ public class EndSeeListener implements Listener {
         if (target != null && viewer.hasPermission("endersee.modify")) {
             Inventory guiInv = event.getInventory();
             syncToRealEnderChest(target, guiInv);
-            target.saveData();
+            CompatibilityUtils.runForPlayer(target, target::saveData);
         }
 
         gui.removeEnderSeeSession(viewer);

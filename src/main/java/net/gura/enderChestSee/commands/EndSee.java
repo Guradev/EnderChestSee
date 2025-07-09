@@ -27,6 +27,11 @@ public class EndSee implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
 
+        if (args.length == 0) {
+            sender.sendMessage(messageHandler.get("invalid-usage"));
+            return true;
+        }
+
         if (args[0].equalsIgnoreCase("reload")) {
             if (!sender.hasPermission("endersee.reload")) {
                 sender.sendMessage(messageHandler.get("no-permission"));

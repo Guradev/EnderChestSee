@@ -2,6 +2,7 @@ name: EnderChestSee
 version: '1.0'
 main: net.gura.enderChestSee.EnderChestSee
 api-version: '1.21'
+folia-supported: true
 load: STARTUP
 authors: [ Gura ]
 description: Minecraft Plugin that allows you to see enderchests of other players
